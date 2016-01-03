@@ -144,7 +144,7 @@ public abstract class ChildSbb implements Sbb, ChildInterface, ChargeInterfacePa
 
 			if (this.logger.isFineEnabled()) {
 				this.logger.fine("Received PROCESS_UNSTRUCTURED_SS_REQUEST_INDICATION for MAP Dialog Id "
-						+ evt.getMAPDialog().getLocalDialogId());
+						+ evt.getMAPDialog().getDialogId());
 			}
 
 			this.setProcessUnstructuredSSRequestInvokeId(evt.getInvokeId());
@@ -183,12 +183,12 @@ public abstract class ChildSbb implements Sbb, ChildInterface, ChargeInterfacePa
 
 			if (this.logger.isFineEnabled()) {
 				this.logger.fine("Received UNSTRUCTURED_SS_RESPONSE_INDICATION for MAP Dialog Id "
-						+ evt.getMAPDialog().getLocalDialogId());
+						+ evt.getMAPDialog().getDialogId());
 			}
 
 			this.setTimer(aci);
 
-			Dialog dialog = new Dialog(DialogType.CONTINUE, evt.getMAPDialog().getLocalDialogId(), null, null);
+			Dialog dialog = new Dialog(DialogType.CONTINUE, evt.getMAPDialog().getDialogId(), null, null);
 			dialog.setMAPMessage(((MAPEvent) evt).getWrappedEvent());
 			this.getCDRChargeInterface().createContinueRecord();
 			EventsSerializeFactory factory = this.getEventsSerializeFactory();
